@@ -1,0 +1,7 @@
+---
+- name: Lesson 01 - What are Ansible Collections - Collection Playbook
+  hosts: localhost
+  tasks:
+    - name: Display a message.
+      debug:
+        msg: "I am a playbook shipped with a collection."

@@ -1,0 +1,4 @@
+---
+- name: Print the role debug message.
+  debug:
+    var: example_debug_message

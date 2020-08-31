@@ -1,0 +1,4 @@
+---
+- name: Print a message.
+  debug:
+    var: globals_debug_message

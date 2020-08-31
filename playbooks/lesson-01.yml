@@ -1,0 +1,32 @@
+---
+- name: Lesson 01 - What are Ansible Collections - Including Roles
+  hosts: localhost
+  tasks:
+    - name: Include a role.
+      include_role:
+        name: demo.core.example
+    - name: Try to print one of it's private variables.
+      debug:
+        var: example_debug_message
+    - name: Introduce some variables to the global scope.
+      include_role:
+        name: demo.core.globals
+        public: yes
+    - name: Print one of those global variables.
+      debug:
+        var: globals_debug_message
+    - name: Include a role while passing parameters.
+      include_role:
+        name: demo.core.example
+      vars:
+        example_debug_message: I am still the "example" role.
+
+- name: Lesson 01 - What are Ansible Collections - Importing Roles
+  hosts: localhost
+  tasks:
+    - name: Import a role with all of it's variables.
+      import_role:
+        name: demo.core.globals
+    - name: Print one of the imported variables.
+      debug:
+        var: globals_debug_message

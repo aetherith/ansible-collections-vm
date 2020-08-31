@@ -1,0 +1,13 @@
+---
+- name: Bootstrap the builder VM.
+  hosts: all
+  become: yes
+  vars:
+    bootstrap_yum_packages:
+      - ansible-2.9.10
+      - vim
+  tasks:
+    - name: Install required YUM packages.
+      package:
+        name: "{{ bootstrap_yum_packages }}"
+        state: present

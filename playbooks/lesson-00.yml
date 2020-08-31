@@ -1,0 +1,11 @@
+---
+- name: Lesson 0 - The Development Environment
+  hosts: localhost
+  tasks:
+    - name: Install required packages.
+      become: yes
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git

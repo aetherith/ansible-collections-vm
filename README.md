@@ -139,41 +139,61 @@ role from `demo.core` to show how the FQRN avoids role name collisions.
 [semver]: https://semver.org/
 
 ### Lesson 03 - Building an Ansible Collection
-First create a new collection outside of the `./ansible_collections` directory.
+Now that we've explored creating an Ansible Collection "in place" let's take a
+look at a different development workflow. With this method we will be left with
+a easy to manage archive file that can be shipped to others to use instead of
+needing to provide Git access or share directories full of files. First, we're
+going to go back to the `/vagrant` directory and create a new collection outside
+of the `ansible_collections/` directory. You can provide any namespace and collection
+name that you would like but we will be using `demo.build` in the following examples.
 
 ```bash
 $ cd /vagrant
-$ ansible-galaxy collection init demo.extension
+$ ansible-galaxy collection init demo.build
 ```
 
-Edit the new collection
-
-Build the collection
+In the current directory you'll now see a directory named `demo` with a subdirectory
+`build` with the expected collection files in it. We will edit this new collection
+and, like before, add a new role which we will use later. Once you're satisfied
+with your collection, it's time to build the archive. Return to the `/vagrant`
+directory and execute the following:
 
 ```bash
-$ ansible-galaxy collection build demo/extension
+$ ansible-galaxy collection build demo/build
 ```
 
-Install the new collection.
+The `ansible-galaxy` tool will actually parse your collection's `galaxy.yml` and
+perform some checksumming on the various files included in your collection before
+outputting an archive. The archive filename will be in the format
+`<namespace>-<collection>-<version>.tar.gz` in the same directory as you ran the
+build command. At this point you have an artifact that can be shipped to users
+or uploaded to Ansible Galaxy, but for now we're just going to install that
+archive to our local machine. Run the following to extract the archive into
+`ansible_collections` and set it up for use.
 
 ```bash
-$ ansible-galaxy collection install ./demo-extension-1.0.0.tar.gz
+$ ansible-galaxy collection install ./demo-build-1.0.0.tar.gz
 ```
 
-You'll see an error about the collection at `demo/core` which is due to how we
-created the collection without the build step.
-
-Edit the lesson playbook to call your new role and run.
+You will likely see two errors about the collections at `demo/core` and `demo/extension`
+which is due to how we created them "in place" instead of following this build
+then install method. Ansible will still find the roles that they provide but
+without going through the install process it will not automatically resolve
+dependencies. The last step is to edit the `playbooks/lesson-03.yml` file to
+call your new role and confirm that it is resolved correctly by running the
+playbook.
 
 ```bash
-$ ansible-playbook playbooks/lesson-0X.yml
+$ ansible-playbook playbooks/lesson-03.yml
 ```
 
-### Lesson  - Installing a Collection from Ansible Galaxy
+### Lesson 04 - Installing a Collection from Ansible Galaxy
 Now it's time to use someone else's code by installing a Collection from Ansible
 Galaxy as described [here][ansible-using-collections]. We are going to be installing
 some PHP roles by [Jeff Geerling][github-geerlingguy], who has done a lot of
-writing and developing around Ansible.
+writing and developing around Ansible. The Galaxy website and API are great if
+you have an internet connection and would like to leverage some of the roles and
+modules already written by the Ansible community.
 
 ```bash
 $ ansible-galaxy collection install geerlingguy.php_roles

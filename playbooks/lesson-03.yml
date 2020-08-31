@@ -1,0 +1,7 @@
+---
+- name: Lesson 03 - Building an Ansible Collection
+  hosts: localhost
+  tasks:
+    - name: Run your built role.
+      include_role:
+        name: demo.build.example

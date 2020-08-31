@@ -1,1 +1,7 @@
 .vagrant
+
+# Ignore any installed collections.
+ansible_collections/**
+
+# Except for the one we ship with.
+!ansible_collections/demo/core

@@ -97,14 +97,48 @@ executions of that role within that play.***
 [ansible-import-role]: https://docs.ansible.com/ansible/latest/modules/import_role_module.html
 [ansible-include-role]: https://docs.ansible.com/ansible/latest/modules/include_role_module.html#include-role-module
 
-### Lesson X - Creating an Ansible Collection
+### Lesson 02 - Creating an Ansible Collection
+Now that we've used collection roles in a playbook it is time for us to create
+a collection of our own. On the VM go to the `/vagrant` directory and then into
+`ansible_collections/` before running `ansible-galaxy` to create your new collection.
 
 ```bash
 $ cd ./ansible_collections
-$ ansible-galaxy collection init demo.core
+$ ansible-galaxy collection init demo.extension
 ```
 
-### Lesson Y - Building an Ansible Collection
+Once the collection is initialized go into `ansible_collections/demo/extension`
+and take a little look around. For the time being we can ignore both the `docs/`
+and `plugins/` directories and instead focus on `galaxy.yml`. This YAML file is
+what provides all the metadata for `ansible-galaxy` and helps track the version
+of your collection, contributers, as well as other role or collection dependencies.
+This is particularly helpful in cases where utility roles have been factored out
+into their own collection but are still required in the playbooks or roles of
+an application collection. Ansible Collections use [SemVer][semver] and dependencies
+can be defined as specific versions or as ranges similar to the way PIP handles
+dependencies. If a dependency is unavailable or uninstallable when `ansible-galaxy`
+is installing a collection it will fail and throw an error to the user informing
+them that they must first install the dependency collection.
+
+Two directories that are *not* created by default but are part of the Collection
+tentative specification are the `files/` and `playbooks/` directories. We've
+already explored the `playbooks/` directory in Lesson 01 so we will cover `files/`
+quickly. Similar to the `files` directory in an Ansible role, the `files/` directory
+in a Collection provides a standard place to put static files that need to be
+shared between multiple roles in a collection or that are integral to the collection
+as a whole. The standard location allows us to lean on Ansible's auto discovery
+feature when using the `copy` module and others to find the file we need based
+on its name.
+
+The task for this lesson is to create a new role `example` within the collection
+we just created and run it with `playbooks/lesson-02.yml`. The role follows the
+standard Ansible structure and can do anything you'd like it to. Additionally,
+if you look at the playbook you will see we are also executing the `example`
+role from `demo.core` to show how the FQRN avoids role name collisions.
+
+[semver]: https://semver.org/
+
+### Lesson 03 - Building an Ansible Collection
 First create a new collection outside of the `./ansible_collections` directory.
 
 ```bash

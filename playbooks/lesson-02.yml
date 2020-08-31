@@ -1,0 +1,10 @@
+---
+- name: Lesson 02 - Creating an Ansible Collection.
+  hosts: localhost
+  tasks:
+    - name: Run your new role.
+      include_role:
+        name: demo.extension.example
+    - name: Prove no name collision.
+      include_role:
+        name: demo.core.example

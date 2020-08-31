@@ -30,3 +30,10 @@
     - name: Print one of the imported variables.
       debug:
         var: globals_debug_message
+
+- name: Lesson 01 - What are Ansible Collections - Variable Scope.
+  hosts: localhost
+  tasks:
+    - name: Try to print one of the global variables.
+      debug:
+        var: globals_debug_message

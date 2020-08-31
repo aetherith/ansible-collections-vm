@@ -87,9 +87,9 @@ in previous versions of Ansible. Unless `public: yes` is set as a task parameter
 on the import, any variables created by role `defaults/` are kept within that
 specific role execution. Lastly, you will see that any overrides that need to be
 passed into a role can be sent in via the task level `vars` keyword and the
-internal variable name. *Note that when this method is used with* `import_role`
-*the values does leak to the global scope at parse time and will effect all
-executions of that role within that play.*
+internal variable name. ***Note that when this method is used with*** `import_role`
+***the values do leak to the global scope at parse time and will effect all
+executions of that role within that play.***
 
 [ansible-get-started-collections]: https://www.ansible.com/blog/getting-started-with-ansible-collections
 [ansible-hands-on-collections]: https://www.ansible.com/blog/hands-on-with-ansible-collections

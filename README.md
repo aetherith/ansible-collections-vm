@@ -202,7 +202,7 @@ $ ansible-galaxy collection install geerlingguy.php_roles
 You will see that the `ansible-galaxy` tool reaches out to the Galaxy API on the
 internet and grabs the dependency map for the new collection. From there it also
 pulls down an archive like the one we created previously and installs it to our
-`./ansible_collections` directory. Now let's run `playbooks/lesson-0X.yml` and
+`./ansible_collections` directory. Now let's run `playbooks/lesson-04.yml` and
 install PHP!
 
 ```bash
@@ -214,7 +214,8 @@ available on our VM.
 
 ```bash
 $ php --version
-
+PHP 5.4.16 (cli) (built: Apr  1 2020 04:07:17)
+...
 ```
 
 [ansible-using-collections]: https://docs.ansible.com/ansible/latest/user_guide/collections_using.html
@@ -226,3 +227,7 @@ $ php --version
   `package` it auto-detects incorrectly to `yum` and if you try to run `dnf`
   explicitly it tries to install the package `python3-dnf` which doesn't exist
   for CentOS7.
+* Every time you use `vagrant rsync` or that `vagrant rsync-auto` runs it will
+  wipe out everything in the VM's `/vagrant` directory that *isn't* present on
+  the local machine. This includes things like collections that have only been
+  installed on the VM side or any other edits you've made.

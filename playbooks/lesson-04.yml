@@ -1,0 +1,8 @@
+---
+- name: Lesson 04 - Installing a Collection from Ansible Galaxy
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Run the PHP role.
+      include_role:
+        name: geerlingguy.php_roles.php
